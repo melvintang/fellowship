@@ -19,7 +19,6 @@ var buddies = [
 var lands = ['The Shire', 'Rivendell', 'Mordor']
 var body = document.querySelector('body')
 
-
 // Part 1
 
 
@@ -178,7 +177,7 @@ theBalrog()
     window.alert('The horn of Gondor has been blown')
     window.alert('Boromir\'s been killed by the Uruk-hai!')
     var boromir = document.querySelectorAll('li')[4]
-    
+
     boromir.style.textDecoration = 'line-through'
     var parent = document.querySelector('.the-fellowship ul')
     console.log(parent)
@@ -191,17 +190,37 @@ hornOfGondor()
   function itsDangerousToGoAlone(){
     // take Frodo and Sam out of the fellowship and move them to Mordor
     // add a div with an id of 'mount-doom' to Mordor
+    var frodo = document.querySelector('.the-fellowship ul li:nth-child(5)')
+    var sam = document.querySelector('.the-fellowship ul li:nth-child(6)')
+    var morDiv = document.createElement('div')
+    morDiv.setAttribute('id', 'mount-doom')
+    var mordor = document.querySelector('article:nth-child(3)')
+    mordor.appendChild(frodo)
+    mordor.appendChild(sam)
+    mordor.appendChild(morDiv)
   }
-
-
+  itsDangerousToGoAlone()
   // Part 11
 
   function weWantsIt() {
     // Create a div with an id of 'gollum' and add it to Mordor
     // Remove the ring from Frodo and give it to Gollum
     // Move Gollum into Mount Doom
-  }
+    var golDiv = document.createElement('div')
+    // golDiv.id = 'gollum'
+    golDiv.setAttribute('id', 'gollum')
+    var mordor = document.querySelector('article:nth-child(3)')
+    mordor.appendChild(golDiv)
 
+    var ring = document.querySelector('#the-ring')
+    var gollum = document.querySelector('#gollum')
+    // important here
+    gollum.appendChild(ring)
+
+    var mount = document.querySelector('#mount-doom')
+    mount.appendChild(gollum)
+  }
+  weWantsIt()
 
   // Part 12
 
@@ -209,4 +228,23 @@ hornOfGondor()
     // remove Gollum and the Ring from the document
     // remove all the buddies from the document
     // Move all the hobbits back to the shire
+
+    // Get the parent of the gollum (with the ring) 1st
+    var mount = document.querySelector('#mount-doom')
+    var gollum = document.querySelector('#gollum')
+    mount.removeChild(gollum)
+
+    var shire = document.querySelector('article:nth-child(1)')
+    var newUl = document.createElement('ul')
+    shire.appendChild(newUl)
+    var hob = document.querySelectorAll('.hobbit')
+    for (var i=0; i < hobbits.length; i++){
+      newUl.appendChild(hob[i])
+    }
+
+    var bud = document.querySelector('.the-fellowship ul')
+    var rem = document.querySelector('.the-fellowship')
+    rem.removeChild(bud)
   }
+
+  thereAndBackAgain()
